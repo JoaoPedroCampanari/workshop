@@ -45,9 +45,10 @@ public class UsersServicesImpl implements UsersServices {
     }
 
     @Override
-    public void deleteById(UUID id) {
+    public String deleteById(UUID id) {
         try{
             usersRepository.deleteById(id);
+            return ("User deleted successfully. ID: " + id);
         }
         catch (EmptyResultDataAccessException e){
             throw new UserNotFoundException("User not found with id: " + id);

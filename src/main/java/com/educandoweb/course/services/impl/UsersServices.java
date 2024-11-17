@@ -14,7 +14,7 @@ public interface UsersServices {
 
     Users save(UsersDto usersDto);
 
-    void deleteById(UUID id);
+    String deleteById(UUID id);
 
     Users update(UUID id, UsersDto usersDto);
 
