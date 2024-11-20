@@ -3,6 +3,8 @@ package com.educandoweb.course.domain.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -23,6 +25,9 @@ public class Users {
     private String phone;
     private String password;
 
+    @OneToMany(mappedBy = "client")
+    private List<Orders> orders = new ArrayList<>();
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -35,4 +40,5 @@ public class Users {
     public int hashCode() {
         return Objects.hash(id, email);
     }
+
 }
