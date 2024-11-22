@@ -1,6 +1,7 @@
 package com.educandoweb.course.controllers;
 
 import com.educandoweb.course.domain.dtos.UsersDto;
+import com.educandoweb.course.domain.entities.Orders;
 import com.educandoweb.course.domain.entities.Users;
 import com.educandoweb.course.services.impl.UsersServices;
 import org.springframework.http.HttpStatus;
@@ -43,5 +44,10 @@ public class UsersController {
     @PutMapping("/{id}")
     public ResponseEntity<Users> update(@PathVariable(value = "id") UUID id, @RequestBody UsersDto usersDto){
         return ResponseEntity.status(HttpStatus.OK).body(usersServices.update(id,usersDto));
+    }
+
+    @GetMapping("/{id}/orders")
+    public ResponseEntity<List<Orders>> findOrderByUserId(@PathVariable(name = "id") UUID id){
+        return ResponseEntity.status(HttpStatus.OK).body(usersServices.findOrderByUserId(id));
     }
 }

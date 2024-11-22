@@ -1,6 +1,7 @@
 package com.educandoweb.course.services.impl;
 
 import com.educandoweb.course.domain.dtos.UsersDto;
+import com.educandoweb.course.domain.entities.Orders;
 import com.educandoweb.course.domain.entities.Users;
 
 import java.util.List;
@@ -17,5 +18,7 @@ public interface UsersServices {
     String deleteById(UUID id);
 
     Users update(UUID id, UsersDto usersDto);
+
+    List<Orders> findOrderByUserId(UUID id);
 
 }

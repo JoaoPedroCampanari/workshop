@@ -1,6 +1,7 @@
 package com.educandoweb.course.services;
 
 import com.educandoweb.course.domain.dtos.UsersDto;
+import com.educandoweb.course.domain.entities.Orders;
 import com.educandoweb.course.domain.entities.Users;
 import com.educandoweb.course.exception.users.EmailAlredyExistException;
 import com.educandoweb.course.exception.users.UserNotFoundException;
@@ -60,5 +61,13 @@ public class UsersServicesImpl implements UsersServices {
         Users users = usersRepository.findById(id).orElseThrow(() -> new UserNotFoundException("User not found with id: " + id));
         BeanUtils.copyProperties(usersDto, users);
         return usersRepository.save(users);
+    }
+
+    @Override
+    public List<Orders> findOrderByUserId(UUID id) {
+
+        Users users = usersRepository.findById(id).orElseThrow(() -> new UserNotFoundException("User not found with id: " + id));
+
+        return users.getOrders();
     }
 }
