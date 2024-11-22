@@ -1,0 +1,1 @@
+WorkShop criado com base na aula de Spring Boot do curso Java Completo - Nelio Alves. Estou fazendo melhorias e implementações mais robustas como tratamento de exceções, endpoint concisos, Utilização de containers do docker para impelementar o postgree e pgadmin, e Utilização do Swagger para melhor vizualização do mapeamentos das classes
