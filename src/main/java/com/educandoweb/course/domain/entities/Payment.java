@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -13,22 +14,15 @@ import java.util.UUID;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Orders {
+public class Payment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
+
     private final LocalDateTime moment = LocalDateTime.now();
 
-    @Enumerated(EnumType.STRING)
-    private OrderStatus orderStatus = OrderStatus.WAITING_PAYMENT;
-
-    @ManyToOne
-    @JoinColumn(name = "client_id")
-    private Users client;
-
-    @OneToOne(mappedBy = "orders")
-    private Payment payment;
-
-
+    @OneToOne
+    @JoinColumn(name = "orders_id")
+    private Orders orders;
 }

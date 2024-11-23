@@ -3,6 +3,7 @@ package com.educandoweb.course.services.impl;
 import com.educandoweb.course.domain.dtos.OrdersDto;
 import com.educandoweb.course.domain.entities.OrderStatus;
 import com.educandoweb.course.domain.entities.Orders;
+import com.educandoweb.course.domain.entities.Payment;
 import com.educandoweb.course.domain.entities.Users;
 
 import java.util.List;
@@ -21,5 +22,7 @@ public interface OrdersServices {
     Orders save(OrdersDto ordersDto);
 
     Users findClientByOrderId(UUID id);
+
+    Payment findPaymentByOrderId(UUID id);
 
 }
