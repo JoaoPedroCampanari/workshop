@@ -47,7 +47,7 @@ public class UsersController {
     }
 
     @GetMapping("/{id}/orders")
-    public ResponseEntity<List<Orders>> findOrderByUserId(@PathVariable(name = "id") UUID id){
-        return ResponseEntity.status(HttpStatus.OK).body(usersServices.findOrderByUserId(id));
+    public ResponseEntity<List<Orders>> findAllOrderByUserId(@PathVariable(name = "id") UUID id){
+        return ResponseEntity.status(HttpStatus.OK).body(usersServices.findAllOrderByUserId(id));
     }
 }

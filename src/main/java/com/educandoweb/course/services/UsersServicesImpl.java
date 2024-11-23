@@ -64,7 +64,7 @@ public class UsersServicesImpl implements UsersServices {
     }
 
     @Override
-    public List<Orders> findOrderByUserId(UUID id) {
+    public List<Orders> findAllOrderByUserId(UUID id) {
 
         Users users = usersRepository.findById(id).orElseThrow(() -> new UserNotFoundException("User not found with id: " + id));
 

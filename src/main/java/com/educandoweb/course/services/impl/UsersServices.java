@@ -19,6 +19,6 @@ public interface UsersServices {
 
     Users update(UUID id, UsersDto usersDto);
 
-    List<Orders> findOrderByUserId(UUID id);
+    List<Orders> findAllOrderByUserId(UUID id);
 
 }

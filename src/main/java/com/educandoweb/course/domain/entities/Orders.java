@@ -18,9 +18,10 @@ public class Orders {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
+    private final LocalDateTime moment = LocalDateTime.now();
 
-    private LocalDateTime moment;
-
+    @Enumerated(EnumType.STRING)
+    private OrderStatus orderStatus;
     @ManyToOne
     @JoinColumn(name = "client_id")
     private Users client;
