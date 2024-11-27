@@ -1,5 +1,6 @@
 package com.educandoweb.course.domain.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -26,8 +27,8 @@ public class Orders {
     @ManyToOne
     @JoinColumn(name = "client_id")
     private Users client;
-
-    @OneToOne(mappedBy = "orders")
+    
+    @OneToOne(mappedBy = "orders", cascade = CascadeType.ALL)
     private Payment payment;
 
 

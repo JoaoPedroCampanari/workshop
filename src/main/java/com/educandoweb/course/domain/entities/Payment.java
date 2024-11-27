@@ -1,5 +1,6 @@
 package com.educandoweb.course.domain.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -23,6 +24,7 @@ public class Payment {
     private final LocalDateTime moment = LocalDateTime.now();
 
     @OneToOne
+    @JsonIgnore
     @JoinColumn(name = "orders_id")
     private Orders orders;
 }
