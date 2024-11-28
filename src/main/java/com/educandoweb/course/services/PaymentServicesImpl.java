@@ -5,6 +5,7 @@ import com.educandoweb.course.domain.entities.OrderStatus;
 import com.educandoweb.course.domain.entities.Orders;
 import com.educandoweb.course.domain.entities.Payment;
 import com.educandoweb.course.exception.payment.PaymentNotFoundException;
+import com.educandoweb.course.exception.users.UserNotFoundException;
 import com.educandoweb.course.repositories.OrdersRepository;
 import com.educandoweb.course.repositories.PaymentRepository;
 import com.educandoweb.course.services.impl.PaymentServices;
@@ -52,11 +53,11 @@ public class PaymentServicesImpl implements PaymentServices {
 
     @Override
     public String deleteById(UUID id) {
-        try{
+        if (paymentRepository.existsById(id)){
             paymentRepository.deleteById(id);
-            return "Payment deleted successfully";
+            return ("Payment deleted successfully. ID: " + id);
         }
-        catch (EmptyResultDataAccessException e){
+        else {
             throw new PaymentNotFoundException("Payment not found with id:" + id);
         }
     }

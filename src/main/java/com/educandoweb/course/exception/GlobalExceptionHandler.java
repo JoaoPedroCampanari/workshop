@@ -1,5 +1,8 @@
 package com.educandoweb.course.exception;
 
+import com.educandoweb.course.exception.category.CategoryNameAlreadyExistException;
+import com.educandoweb.course.exception.category.CategoryNotFoundException;
+import com.educandoweb.course.exception.order.OrderNotFoundException;
 import com.educandoweb.course.exception.payment.PaymentNotFoundException;
 import com.educandoweb.course.exception.users.EmailAlredyExistException;
 import com.educandoweb.course.exception.users.UserNotFoundException;
@@ -50,4 +53,42 @@ public class GlobalExceptionHandler {
 
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(body);
     }
+
+    @ExceptionHandler(CategoryNotFoundException.class)
+    public ResponseEntity<Map<String,Object>> handleCategoryNotFoundException (CategoryNotFoundException ex){
+        Map<String, Object> body = new HashMap<>();
+
+        body.put("status", 404);
+        body.put("error", "Not Found");
+        body.put("message", ex.getMessage());
+        body.put("timestamp", LocalDateTime.now());
+
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(body);
+    }
+
+    @ExceptionHandler(OrderNotFoundException.class)
+    public ResponseEntity<Map<String,Object>> handleOrderNotFoundException (OrderNotFoundException ex){
+        Map<String, Object> body = new HashMap<>();
+
+        body.put("status", 404);
+        body.put("error", "Not Found");
+        body.put("message", ex.getMessage());
+        body.put("timestamp", LocalDateTime.now());
+
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(body);
+    }
+
+    @ExceptionHandler(CategoryNameAlreadyExistException.class)
+    public ResponseEntity<Map<String,Object>> handleCategoryNameAlreadyExistException (CategoryNameAlreadyExistException ex){
+        Map<String, Object> body = new HashMap<>();
+
+        body.put("status", 409);
+        body.put("error", "Conflict");
+        body.put("message", ex.getMessage());
+        body.put("timestamp", LocalDateTime.now());
+
+
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(body);
+    }
+
 }

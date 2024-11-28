@@ -1,5 +1,6 @@
 package com.educandoweb.course.domain.dtos;
 
+import jakarta.annotation.Nullable;
 import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -8,13 +9,9 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
-public class UsersDto {
+@NoArgsConstructor
+public class CategoryDto {
 
     private String name;
-    private String email;
-    private String phone;
-    private String password;
-
 }

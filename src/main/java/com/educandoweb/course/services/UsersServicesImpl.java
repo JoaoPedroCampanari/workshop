@@ -47,11 +47,11 @@ public class UsersServicesImpl implements UsersServices {
 
     @Override
     public String deleteById(UUID id) {
-        try{
+        if (usersRepository.existsById(id)){
             usersRepository.deleteById(id);
             return ("User deleted successfully. ID: " + id);
         }
-        catch (EmptyResultDataAccessException e){
+        else {
             throw new UserNotFoundException("User not found with id: " + id);
         }
     }
@@ -65,9 +65,7 @@ public class UsersServicesImpl implements UsersServices {
 
     @Override
     public List<Orders> findAllOrderByUserId(UUID id) {
-
         Users users = usersRepository.findById(id).orElseThrow(() -> new UserNotFoundException("User not found with id: " + id));
-
         return users.getOrders();
     }
 }
