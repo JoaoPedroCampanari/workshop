@@ -47,7 +47,7 @@ public class ProductController {
         return ResponseEntity.status(HttpStatus.OK).body(productServices.deleteById(id));
     }
 
-    @GetMapping("/AllCategories/{id}")
+    @GetMapping("/Allcategories/{id}")
     public ResponseEntity<Set<Category>> findAllCategoryByProductId(@PathVariable(name = "id") UUID id){
         return ResponseEntity.status(HttpStatus.OK).body(productServices.findAllCategoryByProductId(id));
     }

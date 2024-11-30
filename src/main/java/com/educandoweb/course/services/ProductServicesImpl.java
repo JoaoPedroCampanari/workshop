@@ -3,12 +3,15 @@ package com.educandoweb.course.services;
 import com.educandoweb.course.domain.dtos.ProductDto;
 import com.educandoweb.course.domain.entities.Category;
 import com.educandoweb.course.domain.entities.Product;
+import com.educandoweb.course.exception.category.CategoryNotFoundException;
 import com.educandoweb.course.exception.products.ProductNameAlreadyExistException;
 import com.educandoweb.course.exception.products.ProductNotFoundException;
+import com.educandoweb.course.repositories.CategoryRepository;
 import com.educandoweb.course.repositories.ProductRepository;
 import com.educandoweb.course.services.impl.ProductServices;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Set;
@@ -18,9 +21,11 @@ import java.util.UUID;
 public class ProductServicesImpl implements ProductServices {
 
     private final ProductRepository productRepository;
+    private final CategoryRepository categoryRepository;
 
-    public ProductServicesImpl(ProductRepository productRepository) {
+    public ProductServicesImpl(ProductRepository productRepository, CategoryRepository categoryRepository) {
         this.productRepository = productRepository;
+        this.categoryRepository = categoryRepository;
     }
 
     @Override
@@ -34,6 +39,7 @@ public class ProductServicesImpl implements ProductServices {
     }
 
     @Override
+    @Transactional
     public Product save(ProductDto productDto) {
         if (productRepository.existsByName(productDto.getName())){
             throw new ProductNameAlreadyExistException("Product name already exist!");
@@ -41,6 +47,11 @@ public class ProductServicesImpl implements ProductServices {
 
         Product product = new Product();
         BeanUtils.copyProperties(productDto, product);
+
+        for (UUID id : productDto.getCategoriesId()){
+            Category category = categoryRepository.findById(id).orElseThrow(() -> new CategoryNotFoundException("Category not found with id: " + id));
+            product.addCategoryList(category);
+        }
 
         return productRepository.save(product);
     }

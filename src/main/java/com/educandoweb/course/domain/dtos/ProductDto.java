@@ -20,7 +20,7 @@ public class ProductDto {
     private String description;
     private double price;
     private String imgUrl;
-    private Set<UUID> productsId = new HashSet<>();
+    private Set<UUID> categoriesId = new HashSet<>();
 
 
 }

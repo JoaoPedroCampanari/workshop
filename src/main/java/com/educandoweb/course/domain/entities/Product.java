@@ -35,6 +35,10 @@ public class Product {
     )
     private Set<Category> categories = new HashSet<>();
 
+    public void addCategoryList (Category category){
+        categories.add(category);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
