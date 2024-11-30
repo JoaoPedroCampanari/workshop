@@ -47,13 +47,11 @@ public class UsersServicesImpl implements UsersServices {
 
     @Override
     public String deleteById(UUID id) {
-        if (usersRepository.existsById(id)){
-            usersRepository.deleteById(id);
-            return ("User deleted successfully. ID: " + id);
-        }
-        else {
+        if (!usersRepository.existsById(id)){
             throw new UserNotFoundException("User not found with id: " + id);
         }
+        usersRepository.deleteById(id);
+        return ("User deleted successfully. ID: " + id);
     }
 
     @Override

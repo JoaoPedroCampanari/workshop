@@ -47,7 +47,7 @@ public class CategoryController {
         return ResponseEntity.status(HttpStatus.OK).body(categoryServices.update(id, categoryDto));
     }
 
-    @GetMapping("/products/{id}")
+    @GetMapping("/Allproducts/{id}")
     public ResponseEntity<Set<Product>> findAllProductsByCategoryId (@PathVariable(name = "id") UUID id){
         return ResponseEntity.status(HttpStatus.OK).body(categoryServices.findAllProductsByCategoryId(id));
     }

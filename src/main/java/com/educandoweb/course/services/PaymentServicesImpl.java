@@ -53,12 +53,10 @@ public class PaymentServicesImpl implements PaymentServices {
 
     @Override
     public String deleteById(UUID id) {
-        if (paymentRepository.existsById(id)){
-            paymentRepository.deleteById(id);
-            return ("Payment deleted successfully. ID: " + id);
-        }
-        else {
+        if (!paymentRepository.existsById(id)){
             throw new PaymentNotFoundException("Payment not found with id:" + id);
         }
+        paymentRepository.deleteById(id);
+        return ("Payment deleted successfully. ID: " + id);
     }
 }

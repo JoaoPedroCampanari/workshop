@@ -53,20 +53,16 @@ public class CategoryServicesImpl implements CategoryServices {
 
     @Override
     public String deleteById(UUID id) {
-        if (categoryRepository.existsById(id)){
-            categoryRepository.deleteById(id);
-            return ("Category deleted successfully. ID: " + id);
-        }
-        else {
+        if (!categoryRepository.existsById(id)){
             throw new CategoryNotFoundException("Category not found with id: " + id);
         }
+        categoryRepository.deleteById(id);
+        return ("Category deleted successfully. ID: " + id);
     }
 
     @Override
     public Set<Product> findAllProductsByCategoryId(UUID id) {
-
         Category category = categoryRepository.findById(id).orElseThrow(() -> new CategoryNotFoundException("Category not found with id: " + id));
-
         return category.getProducts();
     }
 }

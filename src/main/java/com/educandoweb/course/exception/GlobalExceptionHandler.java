@@ -4,6 +4,8 @@ import com.educandoweb.course.exception.category.CategoryNameAlreadyExistExcepti
 import com.educandoweb.course.exception.category.CategoryNotFoundException;
 import com.educandoweb.course.exception.order.OrderNotFoundException;
 import com.educandoweb.course.exception.payment.PaymentNotFoundException;
+import com.educandoweb.course.exception.products.ProductNameAlreadyExistException;
+import com.educandoweb.course.exception.products.ProductNotFoundException;
 import com.educandoweb.course.exception.users.EmailAlredyExistException;
 import com.educandoweb.course.exception.users.UserNotFoundException;
 import org.springframework.http.HttpStatus;
@@ -91,4 +93,28 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.CONFLICT).body(body);
     }
 
+    @ExceptionHandler(ProductNotFoundException.class)
+    public ResponseEntity<Map<String,Object>> handleProductNotFoundException (ProductNotFoundException ex){
+        Map<String, Object> body = new HashMap<>();
+
+        body.put("status", 404);
+        body.put("error", "Not Found");
+        body.put("message", ex.getMessage());
+        body.put("timestamp", LocalDateTime.now());
+
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(body);
+    }
+
+    @ExceptionHandler(ProductNameAlreadyExistException.class)
+    public ResponseEntity<Map<String,Object>> handleProductNameAlreadyExistException (ProductNameAlreadyExistException ex){
+        Map<String, Object> body = new HashMap<>();
+
+        body.put("status", 409);
+        body.put("error", "Conflict");
+        body.put("message", ex.getMessage());
+        body.put("timestamp", LocalDateTime.now());
+
+
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(body);
+    }
 }
