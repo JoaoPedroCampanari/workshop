@@ -2,6 +2,7 @@ package com.educandoweb.course.services;
 
 import com.educandoweb.course.domain.dtos.CategoryDto;
 import com.educandoweb.course.domain.entities.Category;
+import com.educandoweb.course.domain.entities.Product;
 import com.educandoweb.course.exception.category.CategoryNameAlreadyExistException;
 import com.educandoweb.course.exception.category.CategoryNotFoundException;
 import com.educandoweb.course.repositories.CategoryRepository;
@@ -10,6 +11,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 @Service
@@ -58,5 +60,13 @@ public class CategoryServicesImpl implements CategoryServices {
         else {
             throw new CategoryNotFoundException("Category not found with id: " + id);
         }
+    }
+
+    @Override
+    public Set<Product> findAllProductsByCategoryId(UUID id) {
+
+        Category category = categoryRepository.findById(id).orElseThrow(() -> new CategoryNotFoundException("Category not found with id: " + id));
+
+        return category.getProducts();
     }
 }
