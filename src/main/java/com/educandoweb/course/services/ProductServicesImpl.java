@@ -71,6 +71,7 @@ public class ProductServicesImpl implements ProductServices {
         Product product = productRepository.findById(id).orElseThrow(() -> new ProductNotFoundException("Product not found with id: " + id));
         BeanUtils.copyProperties(productDto, product);
 
+        product.getCategories().clear();
         for(UUID categoryId : productDto.getCategoriesId()){
             Category category = categoryRepository.findById(categoryId).orElseThrow(() -> new CategoryNotFoundException("Category not found with id: " + categoryId));
             product.addCategoryList(category);
