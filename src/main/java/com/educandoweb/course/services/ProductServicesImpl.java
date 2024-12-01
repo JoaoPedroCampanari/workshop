@@ -65,10 +65,17 @@ public class ProductServicesImpl implements ProductServices {
         return "Product successfully deleted";
     }
 
+    @Transactional
     @Override
     public Product update(UUID id, ProductDto productDto) {
         Product product = productRepository.findById(id).orElseThrow(() -> new ProductNotFoundException("Product not found with id: " + id));
         BeanUtils.copyProperties(productDto, product);
+
+        for(UUID categoryId : productDto.getCategoriesId()){
+            Category category = categoryRepository.findById(categoryId).orElseThrow(() -> new CategoryNotFoundException("Category not found with id: " + categoryId));
+            product.addCategoryList(category);
+        }
+
         return productRepository.save(product);
     }
 
